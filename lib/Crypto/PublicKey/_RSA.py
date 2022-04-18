@@ -37,7 +37,7 @@ def generate_py(bits, randfunc, progress_func=None, e=65537):
     if present, to display the progress of the key generation.
     """
     obj=RSAobj()
-    obj.e = long(e)
+    obj.e = int(e)
 
     # Generate the prime factors of n
     if progress_func:
