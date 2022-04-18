@@ -75,7 +75,7 @@ def exact_log2(num):
     if not isinstance(num, (int, long)):
         raise TypeError("unsupported operand type: %r" % (type(num).__name__,))
 
-    n = long(num)
+    n = int(num)
     if n <= 0:
         raise ValueError("cannot compute logarithm of non-positive number")
 
