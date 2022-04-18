@@ -81,12 +81,12 @@ class _RSAKey(object):
 
 def rsa_construct(n, e, d=None, p=None, q=None, u=None):
     """Construct an RSAKey object"""
-    assert isinstance(n, long)
-    assert isinstance(e, long)
-    assert isinstance(d, (long, type(None)))
-    assert isinstance(p, (long, type(None)))
-    assert isinstance(q, (long, type(None)))
-    assert isinstance(u, (long, type(None)))
+    assert isinstance(n, int)
+    assert isinstance(e, int)
+    assert isinstance(d, (int, type(None)))
+    assert isinstance(p, (int, type(None)))
+    assert isinstance(q, (int, type(None)))
+    assert isinstance(u, (int, type(None)))
     obj = _RSAKey()
     obj.n = n
     obj.e = e
@@ -170,11 +170,11 @@ class _DSAKey(object):
         return v == r
 
 def dsa_construct(y, g, p, q, x=None):
-    assert isinstance(y, long)
-    assert isinstance(g, long)
-    assert isinstance(p, long)
-    assert isinstance(q, long)
-    assert isinstance(x, (long, type(None)))
+    assert isinstance(y, int)
+    assert isinstance(g, int)
+    assert isinstance(p, int)
+    assert isinstance(q, int)
+    assert isinstance(x, (int, type(None)))
     obj = _DSAKey()
     obj.y = y
     obj.g = g
