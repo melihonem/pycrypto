@@ -472,7 +472,7 @@ class BlockAlgo:
         """Create a new CTR cipher from the MAC in SIV mode"""
 
         tag_int = bytes_to_long(tag)
-        init_counter = tag_int ^ (tag_int & long("0x8000000080000000", 0))
+        init_counter = tag_int ^ (tag_int & int("0x8000000080000000", 0))
         ctr = Counter.new(self._factory.block_size * 8,
                           initial_value=init_counter,
                           allow_wraparound=True)
