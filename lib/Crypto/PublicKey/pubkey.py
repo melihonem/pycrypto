@@ -45,7 +45,7 @@ class pubkey:
         restoration."""
         d=self.__dict__
         for key in self.keydata:
-            if d.has_key(key): d[key]=long(d[key])
+            if d.has_key(key): d[key]=int(d[key])
         return d
 
     def __setstate__(self, d):
