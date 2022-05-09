@@ -90,7 +90,7 @@ class AESGenerator(object):
         remainder = bytes & ((1<<20)-1)
 
         retval = []
-        for i in xrange(num_full_blocks):
+        for i in range(num_full_blocks):
             retval.append(self._pseudo_random_data(1<<20))
         retval.append(self._pseudo_random_data(remainder))
         
@@ -123,7 +123,7 @@ class AESGenerator(object):
             raise AssertionError("generator must be seeded before use")
         assert 0 <= num_blocks <= self.max_blocks_per_request
         retval = []
-        for i in xrange(num_blocks >> 12):      # xrange(num_blocks / 4096)
+        for i in range(num_blocks >> 12):      # range(num_blocks / 4096)
             retval.append(self._cipher.encrypt(self._four_kiblocks_of_zeros))
         remaining_bytes = (num_blocks & 4095) << self.block_size_shift  # (num_blocks % 4095) * self.block_size
         retval.append(self._cipher.encrypt(self._four_kiblocks_of_zeros[:remaining_bytes]))
