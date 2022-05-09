@@ -290,7 +290,7 @@ class DerInteger(DerObject):
                 DerObject._decodeFromStream(self, s)
 
                 # Derive self.value from self.payload
-                self.value = 0L
+                self.value = 0
                 bits = 1
                 for i in self.payload:
                     self.value *= 256
