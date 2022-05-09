@@ -151,7 +151,7 @@ class _DSAKey(object):
         # SECURITY TODO - We _should_ be computing SHA1(m), but we don't because that's the API.
         if not self.has_private():
             raise TypeError("No private key")
-        if not (1L < k < self.q):
+        if not (1 < k < self.q):
             raise ValueError("k is not between 2 and q-1")
         inv_blind_k = inverse(blind * k, self.q) # Compute (blind * k)**-1 mod q
         blind_x = self.x * blind
