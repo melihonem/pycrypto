@@ -42,7 +42,7 @@ def generate_py(bits, randfunc, progress_func=None, e=65537):
     # Generate the prime factors of n
     if progress_func:
         progress_func('p,q\n')
-    p = q = 1L
+    p = q = 1
     while number.size(p*q) < bits:
         # Note that q might be one bit longer than p if somebody specifies an odd
         # number of bits for the key. (Why would anyone do that?  You don't get
