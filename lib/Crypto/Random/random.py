@@ -107,7 +107,7 @@ class StrongRandom(object):
         # See http://en.wikipedia.org/wiki/Fisher-Yates_shuffle
         # Working backwards from the end of the array, we choose a random item
         # from the remaining items until all items have been chosen.
-        for i in xrange(len(x)-1, 0, -1):   # iterate from len(x)-1 downto 1
+        for i in range(len(x)-1, 0, -1):   # iterate from len(x)-1 downto 1
             j = self.randrange(0, i+1)      # choose random j such that 0 <= j <= i
             x[i], x[j] = x[j], x[i]         # exchange x[i] and x[j]
 
@@ -120,7 +120,7 @@ class StrongRandom(object):
 
         retval = []
         selected = {}  # we emulate a set using a dict here
-        for i in xrange(k):
+        for i in range(k):
             r = None
             while r is None or selected.has_key(r):
                 r = self.randrange(num_choices)
