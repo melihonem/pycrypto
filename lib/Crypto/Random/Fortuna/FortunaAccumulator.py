@@ -34,12 +34,12 @@ import time
 import warnings
 
 from Crypto.pct_warnings import ClockRewindWarning
-import Crypto.Random.Fortuna.SHAd256
 
 # If the system has monotonic time, we'll use it.
 from Crypto.Util._time import maybe_monotonic_time
 
-import Crypto.Random.Fortuna.FortunaGenerator
+from Crypto.Random.Fortuna import SHAd256
+from Crypto.Random.Fortuna import FortunaGenerator
 
 class FortunaPool(object):
     """Fortuna pool type
