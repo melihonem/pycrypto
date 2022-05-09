@@ -279,7 +279,7 @@ Where:
     try:
         opts, args = getopt.getopt(sys.argv[1:],
                                    'c:l', ['cipher=', 'aslong'])
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(1, msg)
 
     if args:
