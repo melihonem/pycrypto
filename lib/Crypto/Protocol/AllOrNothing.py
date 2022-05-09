@@ -185,7 +185,7 @@ class AllOrNothing:
 
         # better have at least 2 blocks, for the padbytes package and the hash
         # block accumulator
-        if len(blocks) < 2:
+        if len(list(blocks)) < 2:
             raise ValueError, "List must be at least length 2."
 
         # blocks is a list of strings.  We need to deal with them as long
@@ -201,7 +201,7 @@ class AllOrNothing:
         # Since we have all the blocks (or this method would have been called
         # prematurely), we can calculate all the hash blocks.
         hashes = []
-        for i in range(1, len(blocks)):
+        for i in range(1, len(list(blocks))):
             mticki = blocks[i-1] ^ i
             hi = hcipher.encrypt(long_to_bytes(mticki, block_size))
             hashes.append(bytes_to_long(hi))
@@ -215,7 +215,7 @@ class AllOrNothing:
 
         # And we can now decode the original message blocks
         parts = []
-        for i in range(1, len(blocks)):
+        for i in range(1, len(list(blocks))):
             cipherblock = mcipher.encrypt(long_to_bytes(i, block_size))
             mi = blocks[i-1] ^ bytes_to_long(cipherblock)
             parts.append(mi)
@@ -302,7 +302,7 @@ Where:
     print '=========='
     msgblocks = x.digest(b(__doc__))
     print 'message blocks:'
-    for i, blk in zip(range(len(msgblocks)), msgblocks):
+    for i, blk in zip(range(len(list(msgblocks))), msgblocks):
         # base64 adds a trailing newline
         print '    %3d' % i,
         if aslong:
