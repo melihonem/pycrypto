@@ -497,7 +497,7 @@ class BlockAlgo:
         self._omac = [
                 CMAC.new(key, bchr(0) * (self.block_size - 1) + bchr(i),
                          ciphermod=factory)
-                for i in xrange(0, 3)
+                for i in range(0, 3)
                 ]
 
         # Compute MAC of nonce
@@ -915,7 +915,7 @@ class BlockAlgo:
 
         if self.mode == MODE_EAX:
             tag = bchr(0) * self.block_size
-            for i in xrange(3):
+            for i in range(3):
                 tag = strxor(tag, self._omac[i].digest())
             self._tag = tag[:self._mac_len]
 
