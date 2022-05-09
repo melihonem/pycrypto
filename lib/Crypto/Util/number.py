@@ -165,6 +165,7 @@ def size (N):
         bits += 1
     return bits
 
+
 def getRandomNumber(N, randfunc=None):
     """Deprecated.  Use getRandomInteger or getRandomNBitInteger instead."""
     warnings.warn("Crypto.Util.number.getRandomNumber has confusing semantics"+
