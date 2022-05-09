@@ -293,7 +293,7 @@ def _rabinMillerTest(n, rounds, randfunc=None):
 
     tested = []
     # we need to do at most n-2 rounds.
-    for i in xrange (min (rounds, n-2)):
+    for i in range (min (rounds, n-2)):
         # randomly choose a < n and make sure it hasn't been tested yet
         a = getRandomRange (2, n, randfunc)
         while a in tested:
@@ -304,7 +304,7 @@ def _rabinMillerTest(n, rounds, randfunc=None):
         if z == 1 or z == n_1:
             continue
         composite = 1
-        for r in xrange (b):
+        for r in range (b):
             z = (z * z) % n
             if z == 1:
                 return 0
@@ -376,7 +376,7 @@ def getStrongPrime(N, e=0, false_positive_prob=1e-6, randfunc=None):
         # sieve the field
         for prime in sieve_base:
             offset = y % prime
-            for j in xrange ((prime - offset) % prime, len (field), prime):
+            for j in range ((prime - offset) % prime, len (field), prime):
                 field[j] = 1
 
         # look for suitable p[i] starting at y
