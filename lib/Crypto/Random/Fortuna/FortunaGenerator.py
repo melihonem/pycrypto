@@ -35,7 +35,7 @@ from Crypto.Util.number import ceil_shift, exact_log2, exact_div
 from Crypto.Util import Counter
 from Crypto.Cipher import AES
 
-import SHAd256
+import Crypto.Random.Fortuna.SHAd256
 
 class AESGenerator(object):
     """The Fortuna "generator"
