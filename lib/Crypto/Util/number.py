@@ -32,6 +32,10 @@ import math
 import sys
 from Crypto.Util.py3compat import *
 
+import sys
+if sys.version_info[0] == 2 and sys.version_info[1] == 1:
+    from Crypto.Util.py21compat import *
+
 bignum = int
 try:
     from Crypto.PublicKey import _fastmath
@@ -57,7 +61,87 @@ if _fastmath is not None and not _fastmath.HAVE_DECL_MPZ_POWM_SEC:
     _warn("Not using mpz_powm_sec.  You should rebuild using libgmp >= 5 to avoid timing attack vulnerability.", PowmInsecureWarning)
 
 # New functions
-from _number_new import *
+
+
+def ceil_shift(n, b):
+    """Return ceil(n / 2**b) without performing any floating-point or division operations.
+    This is done by right-shifting n by b bits and incrementing the result by 1
+    if any '1' bits were shifted out.
+    """
+    if not isinstance(n, int) or not isinstance(b, int):
+        raise TypeError("unsupported operand type(s): %r and %r" % (type(n).__name__, type(b).__name__))
+
+    assert n >= 0 and b >= 0    # I haven't tested or even thought about negative values
+    mask = (1L << b) - 1
+    if n & mask:
+        return (n >> b) + 1
+    else:
+        return n >> b
+
+def ceil_div(a, b):
+    """Return ceil(a / b) without performing any floating-point operations."""
+
+    if not isinstance(a, int) or not isinstance(b, int):
+        raise TypeError("unsupported operand type(s): %r and %r" % (type(a).__name__, type(b).__name__))
+
+    (q, r) = divmod(a, b)
+    if r:
+        return q + 1
+    else:
+        return q
+
+def floor_div(a, b):
+    if not isinstance(a, int) or not isinstance(b, int):
+        raise TypeError("unsupported operand type(s): %r and %r" % (type(a).__name__, type(b).__name__))
+
+    (q, r) = divmod(a, b)
+    return q
+
+def exact_log2(num):
+    """Find and return an integer i >= 0 such that num == 2**i.
+    If no such integer exists, this function raises ValueError.
+    """
+
+    if not isinstance(num, int):
+        raise TypeError("unsupported operand type: %r" % (type(num).__name__,))
+
+    n = int(num)
+    if n <= 0:
+        raise ValueError("cannot compute logarithm of non-positive number")
+
+    i = 0
+    while n != 0:
+        if (n & 1) and n != 1:
+            raise ValueError("No solution could be found")
+        i += 1
+        n >>= 1
+    i -= 1
+
+    assert num == (1L << i)
+    return i
+
+def exact_div(p, d, allow_divzero=False):
+    """Find and return an integer n such that p == n * d
+    If no such integer exists, this function raises ValueError.
+    Both operands must be integers.
+    If the second operand is zero, this function will raise ZeroDivisionError
+    unless allow_divzero is true (default: False).
+    """
+
+    if not isinstance(p, int) or not isinstance(d, int):
+        raise TypeError("unsupported operand type(s): %r and %r" % (type(p).__name__, type(d).__name__))
+
+    if d == 0 and allow_divzero:
+        n = 0
+        if p != n * d:
+            raise ValueError("No solution could be found")
+    else:
+        (n, r) = divmod(p, d)
+        if r != 0:
+            raise ValueError("No solution could be found")
+
+    assert p == n * d
+    return n
 
 # Commented out and replaced with faster versions below
 ## def long2str(n):
